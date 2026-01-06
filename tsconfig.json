@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./", // 基础路径（用于路径别名）
+    "paths": { // 路径别名（比如 @ 对应 src 目录，实现 import @/xxx 的联想）
+      "@/*": ["src/*"]
+    },
+    "module": "ESNext", // 模块规范
+    "target": "ES6", // 目标语法版本
+    "jsx": "react", // 若项目是 React（JSX），需配置此项
+    "allowJs": true, // 允许识别 JS 文件
+    "checkJs": false // 关闭 JS 语法检查（纯 JS 项目建议关闭）
+  },
+  "include": ["src/**/*"], // 包含的文件范围
+  "exclude": ["node_modules", "dist"] // 排除的文件范围
+}
