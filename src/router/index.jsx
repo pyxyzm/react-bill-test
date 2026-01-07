@@ -2,7 +2,7 @@ import {createBrowserRouter} from "react-router-dom";
 import Layout from "@/pages/Layout/index.jsx";
 import Monthly from "@/pages/Month/index.jsx";
 import Year from "@/pages/Year/index.jsx";
-import New from "@/pages/Year/index.jsx";
+import New from "@/pages/New/index.jsx";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/new",
-        element: < New/>,
+        element: <New/>,
     },
 ]);
 
