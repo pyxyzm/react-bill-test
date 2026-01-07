@@ -5,11 +5,27 @@ import classNames from 'classnames'
 import { billListData } from '@/contants'
 import { useNavigate } from 'react-router-dom'
 import {useState} from "react";
+import {addBillList} from "@/store/modules/billStore.jsx";
+import {useDispatch} from "react-redux";
 
 const New = () => {
     const navigate = useNavigate()
     //准备控制收入和支出的状态
     const [billType, setBillType] = useState('pay')
+    const [money, setMoney] = useState(0)
+    //收集账单类型
+    const [useFor, setUseFor] = useState('')
+    const dispatch = useDispatch()
+    const saveBill = () => {
+        const data = {
+            type: billType,
+            money: billType === 'pay' ? -money : +money,
+            date: new Date(),
+            useFor: useFor
+        }
+        // console.log(data)
+        dispatch(addBillList(data))
+    }
     return (
         <div className="keepAccounts">
             <NavBar className="nav" onBack={() => navigate(-1)}>
@@ -50,6 +66,8 @@ const New = () => {
                                 className="input"
                                 placeholder="0.00"
                                 type="number"
+                                value={money}
+                                onChange={value => setMoney(value)}
                             />
                             <span className="iconYuan">¥</span>
                         </div>
@@ -69,10 +87,10 @@ const New = () => {
                                         <div
                                             className={classNames(
                                                 'item',
-                                                ''
+                                                {selected: useFor === item.type}
                                             )}
                                             key={item.type}
-
+                                            onClick={() => setUseFor(item.type)}
                                         >
                                             <div className="icon">
                                                 <Icon type={item.type} />
@@ -88,7 +106,7 @@ const New = () => {
             </div>
 
             <div className="btns">
-                <Button className="btn save">
+                <Button className="btn save" onClick={saveBill}>
                     保 存
                 </Button>
             </div>
